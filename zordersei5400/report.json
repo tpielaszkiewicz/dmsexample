@@ -1,0 +1,35 @@
+[
+    {
+        "filePath": "/home/user/projects/btp-bootcamp-ei5400/zordersei5400/webapp/Component.js",
+        "messages": [],
+        "errorCount": 0,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "usedDeprecatedRules": []
+    },
+    {
+        "filePath": "/home/user/projects/btp-bootcamp-ei5400/zordersei5400/webapp/utils/SomeUtil.js",
+        "messages": [
+            {
+                "ruleId": "no-alert",
+                "severity": 2,
+                "message": "Unexpected alert.",
+                "line": 1,
+                "column": 1,
+                "nodeType": "CallExpression",
+                "messageId": "unexpected",
+                "endLine": 1,
+                "endColumn": 15
+            }
+        ],
+        "errorCount": 1,
+        "fatalErrorCount": 0,
+        "warningCount": 0,
+        "fixableErrorCount": 0,
+        "fixableWarningCount": 0,
+        "source": "alert(\"Teest\");\n\nfunction testMe(bTest) {\n    bTest = 2;\n}",
+        "usedDeprecatedRules": []
+    }
+]

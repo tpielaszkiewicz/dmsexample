@@ -13,22 +13,32 @@
     "devDependencies": {
         "@ui5/cli": "^2.14.1",
         "@sap/ux-ui5-tooling": "1",
-        "@sap/ux-specification": "UI5-1.84",
+        "@sap/ux-specification": "^1.102.2",
         "@sap/ux-ui5-fe-mockserver-middleware": "1",
         "@sap/ui5-builder-webide-extension": "^1.1.8",
         "ui5-task-zipper": "^0.5.0",
-        "mbt": "^1.2.18"
+        "@sap/eslint-plugin-cds": "^2.4.1",
+        "mbt": "^1.2.18",
+        "eslint": "^8.21.0",
+        "eslint-plugin-only-warn": "^1.0.2",
+        "eslint-plugin-ui5": "^0.1.0",
+        "eslint-webpack-plugin": "^3.2.0",
+        "rimraf": "^3.0.2",
+        "ui5-task-flatten-library": "0.2.5"
     },
     "scripts": {
         "start": "fiori run --open \"test/flpSandbox.html?sap-client=400&sap-ui-xx-viewCache=false#compgbtpzordersei5400-tile\"",
         "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-client=400&sap-ui-xx-viewCache=false#compgbtpzordersei5400-tile\"",
         "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-        "deploy": "fiori verify",
+        "deploy": "npm run build && fiori deploy --config ui5-deploy.yaml && rimraf archive.zip",
         "deploy-config": "fiori add deploy-config",
         "start-noflp": "fiori run --open \"index.html?sap-client=400&sap-ui-xx-viewCache=false\"",
         "start-mock": "fiori run --config ./ui5-mock.yaml --open \"test/flpSandbox.html?sap-client=400&sap-ui-xx-viewCache=false#compgbtpzordersei5400-tile\"",
+        "lint": "eslint webapp -c .eslintrc -f json -o report.json",
         "start-variants-management": "fiori run --open \"preview.html?&sap-client=400&sap-ui-xx-viewCache=false&fiori-tools-rta-mode=true&sap-ui-rta-skip-flex-validation=true#preview-app\"",
-        "build:cf": "ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateManifestBundle generateCachebusterInfo"
+        "build:cf": "ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateManifestBundle generateCachebusterInfo",
+        "undeploy": "fiori undeploy --config ui5-deploy.yaml",
+        "deploy-test": "npm run build && fiori deploy --config ui5-deploy.yaml --testMode true"
     },
     "ui5": {
         "dependencies": [
@@ -36,7 +46,8 @@
             "@sap/ux-ui5-fe-mockserver-middleware",
             "@sap/ui5-builder-webide-extension",
             "ui5-task-zipper",
-            "mbt"
+            "mbt",
+            "ui5-task-flatten-library"
         ]
     },
     "sapux": true,

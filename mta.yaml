@@ -1,6 +1,6 @@
 _schema-version: "3.2" 
 ID: btp-bootcamp-ei5400 
-version: 0.0.2
+version: 0.0.3 
 modules: 
 - name: compgbtpzordersei5400 
   type: html5 
@@ -12,8 +12,6 @@ modules:
     - npm install 
     - npm run build:cf 
     supported-platforms: [] 
-  requires: 
-  - name: uaa_btp-bootcamp-ei5400 
 - name: btp-bootcamp-ei5400-approuter 
   type: approuter.nodejs 
   path: btp-bootcamp-ei5400-approuter 
@@ -21,9 +19,9 @@ modules:
   - name: btp-bootcamp-ei5400_html_repo_runtime 
   - name: uaa_btp-bootcamp-ei5400 
   - name: btp-bootcamp-ei5400-connectivity 
-  - name: btp-bootcamp-dms-ei5400-instance 
-    properties: 
-      destinations: '[{"name": "sdibackend", "url": "https://api-sdm-di.cfapps.us20.hana.ondemand.com", 
+  - name: btp-bootcamp-dms-instance-ei5400  
+    properties:  
+      destinations: '[{"name": "sdibackend", "url": "https://api-sdm-di.cfapps.us20.hana.ondemand.com",  
         "forwardAuthToken": true}]' 
   - name: btp-bootcamp-ei5400-dest-srv 
     group: destinations 
@@ -33,7 +31,7 @@ modules:
       url: https://ui5.sap.com 
   parameters: 
     disk-quota: 256M 
-    memory: 256M 
+    memory: 128M 
 - name: btp-bootcamp-ei5400_ui_deployer 
   type: com.sap.application.content 
   path: . 
@@ -41,6 +39,7 @@ modules:
   - name: btp-bootcamp-ei5400-repo-host 
     parameters: 
       content-target: true 
+  - name: btp-bootcamp-dms-instance-ei5400
   build-parameters: 
     build-result: resources 
     requires: 
@@ -48,16 +47,16 @@ modules:
       - compgbtpzordersei5400.zip 
       name: compgbtpzordersei5400 
       target-path: resources/ 
-- name: btp-bootcamp-ei5400-dest-content
+- name: btp-bootcamp-ei5400-dest-content 
   type: com.sap.application.content 
   requires: 
   - name: btp-bootcamp-ei5400-dest-srv 
     parameters: 
       content-target: true 
-  - name: btp-bootcamp-dms-ei5400-instance 
-    parameters: 
-      service-key: 
-        name: btp-bootcamp-dms-ei5400-instance-key 
+  - name: btp-bootcamp-dms-instance-ei5400  
+    parameters:  
+      service-key:  
+        name: btp-bootcamp-dms-instance-ei5400-key 
   - name: btp-bootcamp-ei5400-repo-host 
     parameters: 
       service-key: 
@@ -69,7 +68,7 @@ modules:
   parameters: 
     content: 
       instance: 
-        destinations:
+        destinations: 
         - Name: btp-bootcamp-ei5400_repo_host 
           ServiceInstanceName: btp-bootcamp-ei5400-html5-srv 
           ServiceKeyName: btp-bootcamp-ei5400-repo-host-key 
@@ -79,32 +78,32 @@ modules:
           ServiceInstanceName: btp-bootcamp-ei5400-xsuaa-service 
           ServiceKeyName: btp-bootcamp-ei5400-uaa-key 
           sap.cloud.service: compgbtpzordersei5400 
-        - Authentication: OAuth2UserTokenExchange 
-          Name: btp-bootcamp-dms-ei5400
-          ServiceInstanceName: btp-bootcamp-dms-ei5400-instance
+        - Authentication: OAuth2UserTokenExchange  
+          Name: btp-bootcamp-dms-ei5400  
+          ServiceInstanceName: btp-bootcamp-dms-instance-ei5400  
           ServiceKeyName: btp-bootcamp-dms-instance-ei5400-key  
         existing_destinations_policy: update 
-      subaccount: 
-        destinations: 
-        - Authentication: OAuth2UserTokenExchange 
-          Name: btp-bootcamp-dms-ei5400
-          ServiceInstanceName: btp-bootcamp-dms-ei5400-instance
-          ServiceKeyName: btp-bootcamp-dms-instance-ei5400-key  
-        existing_destinations_policy: update
+      subaccount:  
+        destinations:  
+        - Authentication: OAuth2UserTokenExchange  
+          Name: btp-bootcamp-dms-ei5400  
+          ServiceInstanceName: btp-bootcamp-dms-instance-ei5400  
+          ServiceKeyName: btp-bootcamp-dms-instance-ei5400-key 
+        existing_destinations_policy: update 
   build-parameters: 
     no-source: true 
 resources: 
-- name: btp-bootcamp-dms-ei5400-instance 
-  type: org.cloudfoundry.managed-service 
-  parameters: 
-    service: sdm 
-    service-plan: standard 
 - name: btp-bootcamp-ei5400-repo-host 
   type: org.cloudfoundry.managed-service 
   parameters: 
     service: html5-apps-repo 
     service-name: btp-bootcamp-ei5400-html5-srv 
     service-plan: app-host 
+- name: btp-bootcamp-dms-instance-ei5400  
+  type: org.cloudfoundry.managed-service  
+  parameters:  
+    service: sdm  
+    service-plan: standard 
 - name: btp-bootcamp-ei5400-dest-srv 
   type: org.cloudfoundry.managed-service 
   parameters: 

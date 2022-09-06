@@ -90,9 +90,9 @@
             "documentTable": { 
                 "name": "com.sap.ecm.reuse.documentTable", 
                 "settings": { 
-                    "destinationPath": "/comsapecmreuse.comsapecmreusedocumentTable/api", 
-                    "repositoryId": "c65a174c-cbea-48ca-9423-0a66caa783ba", 
-                    "objectId": "ee39c57000bcbaee2f360e26"
+                    "destinationPath": "./dms/api", 
+                    "repositoryId": "68037e0b-f3bf-4c85-8d42-de620419461f", 
+                    "objectId": "ef22bd7000287839f4a56136" 
                 } 
             } 
         }, 

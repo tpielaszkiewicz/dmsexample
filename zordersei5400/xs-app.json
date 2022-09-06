@@ -22,12 +22,12 @@
       "destination": "ui5"
     },
     {  
-        "source": "^/comsapecmreuse.comsapecmreusedocumentTable/api(.*)$", 
-        "target": "/$1", 
-        "authenticationType": "xsuaa", 
-        "service": "com.sap.ecm.reuse", 
-        "endpoint": "ecmservice" 
-    },
+      "source": "^/dms/api(.*)$", 
+      "target": "/$1", 
+      "authenticationType": "xsuaa", 
+      "service": "com.sap.ecm.reuse", 
+      "endpoint": "ecmservice" 
+    }, 
     {
       "source": "^(.*)$",
       "target": "$1",
